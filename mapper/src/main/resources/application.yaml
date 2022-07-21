@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url:  jdbc:mysql://localhost:3306/fmmall?serverTimezone=UTC
+      username: root
+      password: xxxx
+  # 由于swagger版本和springBoot版本不兼容无法启动,
+  # 需要将默认路径匹配策略从PathPatternParser改为原来的AntPathMatcher
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+mybatis:
+  mapper-locations: classpath:mappers/*Mapper.xml
+  # 虽然entity包是在beans模块下，但是因为mapper模块依赖了beans模块，所以相当于mapper模块中存在entity包
+  type-aliases-package: com.psj.fmmall.entity
+
