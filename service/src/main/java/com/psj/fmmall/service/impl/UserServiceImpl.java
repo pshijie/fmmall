@@ -7,13 +7,18 @@ import com.psj.fmmall.utils.Base64Utils;
 import com.psj.fmmall.utils.MD5Utils;
 import com.psj.fmmall.vo.ResStatus;
 import com.psj.fmmall.vo.ResultVO;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author psj
@@ -77,9 +82,18 @@ public class UserServiceImpl implements UserService {
             String md5Pwd = MD5Utils.md5(pwd);
             // 使用加密后的密码和user中的密码进行匹配
             if (md5Pwd.equals(users.get(0).getPassword())) {
-                // 验证成功
                 // 如果登录成功,需要先生成令牌token(即按照特定规则生成的字符串)
-                String token = Base64Utils.encode(name + 123456);
+//                String token = Base64Utils.encode(name + "psj");  // 使用Base64算法加密,安全性较低且不具备时效性
+
+                Map<String, Object> map = new HashMap<>();
+                JwtBuilder builder = Jwts.builder();
+                String token = builder.setSubject(name)  // 设置token中携带的数据
+                        .setIssuedAt(new Date())  // 设置token的生成时间,用于过期校验
+                        .setId(users.get(0).getUserId() + "")  // 设置用户id为token的id
+                        .setClaims(map)  // map中存放用户的角色权限信息
+                        .setExpiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000))  // 设置token过期时间(1天)
+                        .signWith(SignatureAlgorithm.HS256, "pengshijie")  // 设置加密方式和加密的密码(密码设置过短会报错)
+                        .compact();
                 return new ResultVO(ResStatus.OK, token, users.get(0));
             } else {
                 // 密码错误
