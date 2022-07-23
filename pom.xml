@@ -36,6 +36,7 @@
         </dependencies>
     </dependencyManagement>
 
+    <!--如果打包时出现异常，可以注释build-->
     <build>
         <plugins>
             <plugin>
