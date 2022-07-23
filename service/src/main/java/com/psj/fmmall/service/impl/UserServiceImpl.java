@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UsersMapper usersMapper;
 
+    // 用户注册(注册页面只要输入两个值)
     @Override
     @Transactional  // 可能会出现多线程操作:一个线程填写了信息校验通过(即user==null)，另一个线程做了相同的操作且先进行了注册
     public ResultVO userRegist(String name, String pwd) {
@@ -65,6 +66,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    // 用户登录
     @Override
     public ResultVO checkLogin(String name, String pwd) {
         // 1.根据用户名查询用户

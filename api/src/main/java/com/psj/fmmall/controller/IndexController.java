@@ -1,5 +1,6 @@
 package com.psj.fmmall.controller;
 
+import com.psj.fmmall.service.CategoryService;
 import com.psj.fmmall.service.IndexImgService;
 import com.psj.fmmall.vo.ResultVO;
 import io.swagger.annotations.Api;
@@ -26,9 +27,19 @@ public class IndexController {
     @Autowired
     IndexImgService indexImgService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @GetMapping("/indeximg")
     @ApiOperation("首页轮播图接口")
-    public ResultVO listIndexImgs(){
+    public ResultVO listIndexImgs() {
         return indexImgService.listIndexImgs();
     }
+
+    @GetMapping("/category")
+    @ApiOperation("商品分类查询接口")
+    public ResultVO listCategory() {
+        return categoryService.listCategories();
+    }
+
 }
