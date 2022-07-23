@@ -1,7 +1,9 @@
 package com.psj.fmmall;
 
 import com.psj.fmmall.dao.CategoryMapper;
+import com.psj.fmmall.dao.ProductMapper;
 import com.psj.fmmall.entity.CategoryVO;
+import com.psj.fmmall.entity.ProductVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class ApiApplicationTest {
     @Autowired
     private CategoryMapper categoryMapper;
 
+    @Autowired
+    private ProductMapper productMapper;
+
     @Test
     public void testCategory() {
 //        List<CategoryVO> categoryVOS = categoryMapper.selectAllCategories();
@@ -34,6 +39,14 @@ public class ApiApplicationTest {
                     System.out.println("\t\t" + c3);
                 }
             }
+        }
+    }
+
+    @Test
+    public void testRecommend() {
+        List<ProductVO> productVOS = productMapper.selectRecommendProducts();
+        for (ProductVO productVO : productVOS) {
+            System.out.println(productVO);
         }
     }
 }

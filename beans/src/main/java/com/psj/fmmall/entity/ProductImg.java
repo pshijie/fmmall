@@ -5,6 +5,20 @@ import javax.persistence.*;
 
 @Table(name = "product_img")
 public class ProductImg {
+
+    @Override
+    public String toString() {
+        return "ProductImg{" +
+                "id='" + id + '\'' +
+                ", itemId='" + itemId + '\'' +
+                ", url='" + url + '\'' +
+                ", sort=" + sort +
+                ", isMain=" + isMain +
+                ", createdTime=" + createdTime +
+                ", updatedTime=" + updatedTime +
+                '}';
+    }
+
     /**
      * 图片主键
      */

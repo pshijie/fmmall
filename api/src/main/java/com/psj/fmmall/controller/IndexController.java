@@ -1,7 +1,9 @@
 package com.psj.fmmall.controller;
 
+import com.psj.fmmall.dao.ProductMapper;
 import com.psj.fmmall.service.CategoryService;
 import com.psj.fmmall.service.IndexImgService;
+import com.psj.fmmall.service.ProductService;
 import com.psj.fmmall.vo.ResultVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,6 +32,9 @@ public class IndexController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private ProductService productService;
+
     @GetMapping("/indeximg")
     @ApiOperation("首页轮播图接口")
     public ResultVO listIndexImgs() {
@@ -40,6 +45,12 @@ public class IndexController {
     @ApiOperation("商品分类查询接口")
     public ResultVO listCategory() {
         return categoryService.listCategories();
+    }
+
+    @GetMapping("/list-recommends")
+    @ApiOperation("查询推荐商品接口")
+    public ResultVO listRecommendProducts() {
+        return productService.listRecommendProducts();
     }
 
 }
