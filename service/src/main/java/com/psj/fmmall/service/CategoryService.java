@@ -13,4 +13,7 @@ public interface CategoryService {
     // 查询所有类别(包括一/二/三级)
     public ResultVO listCategories();
 
+    // 查询一级类别以及该分类下销量最高的6个商品
+    public ResultVO listFirstCategories();
+
 }

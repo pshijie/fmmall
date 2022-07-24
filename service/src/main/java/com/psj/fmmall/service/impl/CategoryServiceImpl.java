@@ -29,4 +29,12 @@ public class CategoryServiceImpl implements CategoryService {
         ResultVO resultVO = new ResultVO(ResStatus.OK, "success", categoryVOS);
         return resultVO;
     }
+
+    // 查询一级类别以及该分类下销量最高的6个商品
+    @Override
+    public ResultVO listFirstCategories() {
+        List<CategoryVO> categoryVOS = categoryMapper.selectFirstLevelCategories();
+        ResultVO resultVO = new ResultVO(ResStatus.OK, "success", categoryVOS);
+        return resultVO;
+    }
 }

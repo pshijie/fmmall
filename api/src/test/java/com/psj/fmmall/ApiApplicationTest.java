@@ -49,4 +49,12 @@ public class ApiApplicationTest {
             System.out.println(productVO);
         }
     }
+
+    @Test
+    public void testSelectFirstLevelCategories() {
+        List<CategoryVO> categoryVOS = categoryMapper.selectFirstLevelCategories();
+        for (CategoryVO categoryVO : categoryVOS) {
+            System.out.println(categoryVO);
+        }
+    }
 }

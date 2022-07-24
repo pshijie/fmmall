@@ -1,6 +1,5 @@
 package com.psj.fmmall.controller;
 
-import com.psj.fmmall.dao.ProductMapper;
 import com.psj.fmmall.service.CategoryService;
 import com.psj.fmmall.service.IndexImgService;
 import com.psj.fmmall.service.ProductService;
@@ -48,9 +47,15 @@ public class IndexController {
     }
 
     @GetMapping("/list-recommends")
-    @ApiOperation("查询推荐商品接口")
+    @ApiOperation("新品推荐接口")
     public ResultVO listRecommendProducts() {
         return productService.listRecommendProducts();
+    }
+
+    @GetMapping("/category-recommends")
+    @ApiOperation("分类推荐接口")
+    public ResultVO listRecommendProductsByCategory() {
+        return categoryService.listFirstCategories();
     }
 
 }

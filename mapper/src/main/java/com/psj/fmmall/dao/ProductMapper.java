@@ -10,7 +10,9 @@ import java.util.List;
 @Repository
 public interface ProductMapper extends GeneralDAO<Product> {
 
-    // 商品推荐
+    // 根据商品创建时间推荐前3个商品
     public List<ProductVO> selectRecommendProducts();
 
+    // 根据一级类别id获取该类别销量前6的商品
+    public List<ProductVO> selectTop6ByCategory(int cid);
 }

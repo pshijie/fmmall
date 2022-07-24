@@ -31,20 +31,39 @@
                     column="product_id"/>
     </resultMap>
 
-    <!--商品推荐-->
+    <!--                           商品推荐                   -->
     <select id="selectRecommendProducts" resultMap="ProductVOMap">
-    select
-      product_id,
-      product_name,
-      category_id,
-      root_category_id,
-      sold_num,
-      product_status,
-      content,
-      create_time,
-      update_time
-    from product
-    order by create_time desc
-    limit 0,3
-  </select>
+        select
+          product_id,
+          product_name,
+          category_id,
+          root_category_id,
+          sold_num,
+          product_status,
+          content,
+          create_time,
+          update_time
+        from product
+        order by create_time desc
+        limit 0,3
+    </select>
+    <!--                            商品推荐                     -->
+
+    <!--                  根据一级类别id获取该类别销量前6的商品      -->
+    <select id="selectTop6ByCategory" resultMap="ProductVOMap">
+        select product_id,
+               product_name,
+               category_id,
+               root_category_id,
+               sold_num,
+               product_status,
+               content,
+               create_time,
+               update_time
+        from product
+        where root_category_id=#{cid}
+        order by sold_num desc limit 0,6
+    </select>
+    <!--                  根据一级类别id获取该类别销量前6的商品      -->
+
 </mapper>
